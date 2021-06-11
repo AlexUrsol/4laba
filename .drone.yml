@@ -1,0 +1,36 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+
+- name: hello
+  image: python
+  commands:
+  - python ./hello.py
+
+- name: testing
+  image: python
+  commands:
+  - python --version
+
+- name: fascade
+  image: python
+  commands:
+  - pip install requests
+  - pip install Flask
+  - python ./logging_service.py
+
+- name: logging
+  image: python
+  commands:
+  - pip install requests
+  - python ./facade_service.py
+  - pip install Flask
+
+- name: msg
+  image: python
+  commands:
+  - pip install requests
+  - pip install Flask
+  - python ./messages_service.py
